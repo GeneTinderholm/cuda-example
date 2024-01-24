@@ -11,8 +11,8 @@ extern "C" {
 int add_arr(double *a, double *b, size_t len) {
     double *dev_a, *dev_b;
     size_t arr_size_bytes = len * sizeof(double),
-        block_size = 1024,
-        num_blocks = (size_t)std::ceil((double)(len % block_size));
+            block_size = 1024,
+            num_blocks = (size_t) std::ceil(((double) len) / ((double) block_size));
     cudaError_t err = cudaMalloc((void **) &dev_a, arr_size_bytes);
     if (err != cudaSuccess) {
         goto cleanup;
