@@ -48,6 +48,9 @@ int add_arr(double *a, double *b, size_t len) {
             cleanup_err = err_b;
         }
     }
-    return err || cleanup_err;
+    if (err == cudaSuccess) {
+        err = cleanup_err;
+    }
+    return err;
 }
 }
