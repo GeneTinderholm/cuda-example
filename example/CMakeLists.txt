@@ -5,6 +5,8 @@ set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CXX_STANDARD  17)
 
 add_library(examplestatic STATIC library.cu)
+set_target_properties(examplestatic PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
+
 add_library(exampleshared SHARED library.cu)
 
 set_target_properties(examplestatic PROPERTIES
