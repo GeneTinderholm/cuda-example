@@ -1,0 +1,16 @@
+package shared
+
+/*
+   #cgo LDFLAGS: -lexampleshared -L${SRCDIR}/../example/build -lcuda
+   #include <stdlib.h>
+   int add_arr(double *a, double *b, size_t len);
+*/
+import "C"
+import "fmt"
+
+func cudaAdd(a, b []float64) error {
+	if res := C.add_arr((*C.double)(&a[0]), (*C.double)(&b[0]), C.size_t(len(a))); res != 0 {
+		return fmt.Errorf("got bad error code from C.add %d", int(res))
+	}
+	return nil
+}
