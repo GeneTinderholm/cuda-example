@@ -3,3 +3,4 @@ example/build.bak
 example/cmake-build-debug
 example/.idea
 .idea/
+*.o
