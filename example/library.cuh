@@ -4,7 +4,7 @@
 #include <cstddef>
 
 extern "C"{
-int add_arr(double *a, double *b, size_t len);
+int add_wrapper(double *a, double *b, size_t len);
 }
 
 #endif //UNTITLED_LIBRARY_CUH

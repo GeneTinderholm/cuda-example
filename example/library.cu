@@ -1,6 +1,6 @@
 #include "library.cuh"
 
-__global__ void add(double *a, double *b, size_t len) {
+__global__ void add_kernel(double *a, double *b, size_t len) {
     size_t i = blockIdx.x * blockDim.x + threadIdx.x;
     if (i < len) {
         a[i] = a[i] + b[i];
@@ -8,7 +8,7 @@ __global__ void add(double *a, double *b, size_t len) {
 }
 
 extern "C" {
-int add_arr(double *a, double *b, size_t len) {
+int add_wrapper(double *a, double *b, size_t len) {
     double *dev_a, *dev_b;
     size_t arr_size_bytes = len * sizeof(double),
             block_size = 1024,
@@ -33,7 +33,7 @@ int add_arr(double *a, double *b, size_t len) {
         goto cleanup;
     }
 
-    add<<<num_blocks, block_size>>>(dev_a, dev_b, len);
+    add_kernel<<<num_blocks, block_size>>>(dev_a, dev_b, len);
 
     err = cudaMemcpy(a, dev_a, arr_size_bytes, cudaMemcpyDeviceToHost);
 
