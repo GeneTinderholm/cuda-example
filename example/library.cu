@@ -7,8 +7,7 @@ __global__ void add_kernel(double *a, double *b, size_t len) {
     }
 }
 
-extern "C" {
-int add_wrapper(double *a, double *b, size_t len) {
+cudaError_t add_arrays(double *a, double *b, size_t len) {
     double *dev_a, *dev_b;
     size_t arr_size_bytes = len * sizeof(double),
             block_size = 1024,
@@ -52,5 +51,10 @@ int add_wrapper(double *a, double *b, size_t len) {
         err = cleanup_err;
     }
     return err;
+}
+
+extern "C" {
+int add_wrapper(double *a, double *b, size_t len) {
+    return add_arrays(a, b, len);
 }
 }

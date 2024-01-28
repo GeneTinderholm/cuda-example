@@ -1,7 +1,7 @@
 #include "library.cuh"
 #include <gtest/gtest.h>
 
-TEST(TestAddArr, add_arr_should_add_arrays) {
+TEST(TestAddArr, add_wrapper_should_add_arrays) {
     double a[4] = {1, 2, 3, 4};
     double b[4] = {5, 6, 7, 8};
     int err = add_wrapper(a, b, 4);
